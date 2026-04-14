@@ -30,11 +30,10 @@ export class BirthdayPage extends LitElement {
 
   constructor() {
     super();
-    // this.guestCount = 0;
   }
 
   static properties = {
-    // guestCount: { type: Number }
+    guestCount: { type: Number }
   };
 
   handleRSVP() {
