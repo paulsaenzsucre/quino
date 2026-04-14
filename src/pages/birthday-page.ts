@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit';
 
 // Import all components
 import '../components/hero-section';
+import { property } from 'lit/decorators.js';
 // import '../components/countdown-timer';
 // import '../components/guest-counter';
 // import '../components/rsvp-button';
@@ -9,6 +10,9 @@ import '../components/hero-section';
 // import '../components/castle-background';
 
 export class BirthdayPage extends LitElement {
+  @property()
+  guestCount = 0;
+
   static styles = css`
     :host {
       display: block;
@@ -31,10 +35,6 @@ export class BirthdayPage extends LitElement {
   constructor() {
     super();
   }
-
-  static properties = {
-    guestCount: { type: Number }
-  };
 
   handleRSVP() {
     // this.guestCount++;
@@ -75,11 +75,11 @@ export class BirthdayPage extends LitElement {
         <div class="section">
           <button
             @click=${() =>
-              window.open(
-                'https://maps.google.com/?q=-12.0464,-77.0428',
-                '_blank'
-              )
-            }
+        window.open(
+          'https://maps.google.com/?q=-12.0464,-77.0428',
+          '_blank'
+        )
+      }
           >
             📍 View Location
           </button>
