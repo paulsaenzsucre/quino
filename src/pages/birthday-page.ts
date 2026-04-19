@@ -1,8 +1,9 @@
 import { LitElement, html, css } from 'lit';
+import { property } from 'lit/decorators.js';
 
 // Import all components
 import '../components/hero-section';
-import { property } from 'lit/decorators.js';
+import '../components/new-hero.mjs'
 // import '../components/countdown-timer';
 // import '../components/guest-counter';
 // import '../components/rsvp-button';
@@ -47,9 +48,7 @@ export class BirthdayPage extends LitElement {
       <castle-background></castle-background>
 
       <!-- Hero -->
-      <hero-section
-        name="Kendra"
-      ></hero-section>
+      <app-hero></app-hero>
 
       <div class="container">
         <!-- Countdown -->
