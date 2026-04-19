@@ -18,7 +18,7 @@ export class AppHero extends LitElement {
 
     .hero {
       position: relative;
-      height: 100dvh;
+      height: 100vh;
       height: var(--app-height);
       background: white;
       color: white;
