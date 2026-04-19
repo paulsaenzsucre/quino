@@ -6,7 +6,6 @@ import misquince from '../assets/images/misquince.svg';
 import video from '../assets/intro.mp4';
 import corner from '../assets/images/corner.png';
 import quinceanera from '../assets/images/quinceanera.png';
-import leafs from '../assets/images/leafs.png';
 
 @customElement("app-hero")
 export class AppHero extends LitElement {
