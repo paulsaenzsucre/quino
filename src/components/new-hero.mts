@@ -19,6 +19,7 @@ export class AppHero extends LitElement {
     .hero {
       position: relative;
       height: 100dvh;
+      height: var(--app-height);
       background: white;
       color: white;
       overflow: hidden;
@@ -137,6 +138,21 @@ export class AppHero extends LitElement {
       top: 5%;
     }
   `;
+
+  private setAppHeight = () => {
+    const vh = window.innerHeight;
+    document.documentElement.style.setProperty("--app-height", `${vh}px`)
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.setAppHeight();
+    window.addEventListener("resize", this.setAppHeight)
+  }
+
+  disconnectedCallback(): void {
+    window.removeEventListener("resize", this.setAppHeight)
+  }
 
   private handleClick() {
     if (this.mode === "finished") {
