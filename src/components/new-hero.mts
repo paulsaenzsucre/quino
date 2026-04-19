@@ -205,6 +205,10 @@ export class AppHero extends LitElement {
               <video
                 src="${video}"
                 autoplay
+                muted
+                playsinline
+                webkit-playsinline
+                preload="auto"
                 @ended=${this.handleVideoEnd}
               ></video>
             `}
