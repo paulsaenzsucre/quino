@@ -104,6 +104,7 @@ export class AppHero extends LitElement {
       font-weight: 800;
       font-size: 50px;
       color: #0073e6;
+      margin-bottom: 6px;
     }
 
     button {
@@ -245,7 +246,7 @@ export class AppHero extends LitElement {
 
     .count {
       position: absolute;
-      bottom: 0;
+      bottom: 6px;
       z-index: 10;
     }
   `;
@@ -427,7 +428,16 @@ export class AppHero extends LitElement {
       </div>
       ${this.mode === "finished"
             ? html`
-      <party-countdown class="count" target="2026-05-30T00:20:00-05:00"></party-countdown>`
+      <party-countdown
+        class="count"
+        target="2026-05-30T00:20:00-05:00"
+        style="
+          --size: 60px;
+          --radius: 40;
+          --stroke: 4;
+          --value-size: 20px;
+          --label-size: 15px";
+      ></party-countdown>`
             : null}
     `
         : html`

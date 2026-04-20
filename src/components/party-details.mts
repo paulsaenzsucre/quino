@@ -12,8 +12,9 @@ export class PartyDetails extends LitElement {
     }
 
     svg {
-      width: 120px;
-      height: 120px;
+      width: 80px;
+      height: 80px;
+      margin-bottom: 6px
     }
 
     .month-text {
@@ -63,7 +64,7 @@ export class PartyDetails extends LitElement {
       <p class="local">
         Local Hermosa <br> Av. Bolivar con ruta "E" <br> Villa El Salvador
       </p>
-      <svg viewBox="0 0 120 120">
+      <svg viewBox="20 20 80 80">
         <defs>
           <!-- TOP ARC -->
           <path
