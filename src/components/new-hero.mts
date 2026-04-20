@@ -58,7 +58,7 @@ export class AppHero extends LitElement {
     }
 
     /* Decorative images */
-
+    /* 🦋 Butterfly container (FLOATING) */
     .butterfly {
       position: absolute;
       width: 28px;
@@ -70,41 +70,73 @@ export class AppHero extends LitElement {
       pointer-events: none;
     }
 
-    /* Different positions */
+    /* 🪽 Wings (FLAPPING) */
+    .wing {
+      width: 100%;
+      height: 100%;
+
+      fill: #a3d5ff;
+      opacity: 0.8;
+
+      transform-origin: center;
+      animation: flap 0.4s infinite alternate ease-in-out;
+    }
+
+    /* Individual butterflies */
     .b1 {
       left: 10%;
-      bottom: 10%;
-      animation: float1 12s infinite ease-in-out;
+      bottom: 5%;
+      animation: float1 14s infinite ease-in-out;
     }
 
     .b2 {
       right: 15%;
-      bottom: 20%;
-      animation: float2 14s infinite ease-in-out;
+      bottom: 10%;
+      animation: float2 16s infinite ease-in-out;
     }
 
     .b3 {
       left: 50%;
-      bottom: 5%;
-      animation: float3 16s infinite ease-in-out;
+      bottom: 0%;
+      animation: float3 18s infinite ease-in-out;
     }
 
+    .b4 {
+      right: 30%;
+      bottom: 8%;
+      animation: float4 20s infinite ease-in-out;
+    }
+
+    /* 🌬️ Floating paths */
     @keyframes float1 {
-      0%   { transform: translate(0, 0) scale(1); }
-      50%  { transform: translate(40px, -120px) scale(1.1); }
-      100% { transform: translate(0, -240px) scale(1); }
+      0%   { transform: translate(0, 0) rotate(0deg); }
+      50%  { transform: translate(40px, -120px) rotate(5deg); }
+      100% { transform: translate(0, -240px) rotate(-5deg); }
     }
 
     @keyframes float2 {
-      0%   { transform: translate(0, 0); }
-      50%  { transform: translate(-60px, -150px); }
-      100% { transform: translate(0, -300px); }
+      0%   { transform: translate(0, 0) rotate(0deg); }
+      50%  { transform: translate(-60px, -150px) rotate(-6deg); }
+      100% { transform: translate(0, -300px) rotate(6deg); }
     }
 
     @keyframes float3 {
-      0%   { transform: translate(-50%, 0); }
-      50%  { transform: translate(-30%, -130px); }
-      100% { transform: translate(-50%, -260px); }
+      0%   { transform: translate(-50%, 0) rotate(0deg); }
+      50%  { transform: translate(-30%, -130px) rotate(4deg); }
+      100% { transform: translate(-50%, -260px) rotate(-4deg); }
+    }
+
+    @keyframes float4 {
+      0%   { transform: translate(0, 0) rotate(0deg); }
+      50%  { transform: translate(30px, -100px) rotate(8deg); }
+      100% { transform: translate(-20px, -220px) rotate(-6deg); }
+    }
+
+    /* 🪽 Flapping */
+
+    @keyframes flap {
+      from { transform: scaleX(1); }
+      to   { transform: scaleX(1.25); }
     }
 
     .img-left-bottom {
@@ -231,17 +263,37 @@ export class AppHero extends LitElement {
         ${this.mode !== "playing"
         ? html`
         <!-- Butterflies -->
-              <svg class="butterfly b1" viewBox="0 0 24 24">
-                <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 C16 2, 22 6, 18 12 C22 18, 16 22, 12 12Z" />
-              </svg>
+              <!-- 🦋 Butterfly 1 -->
+        <div class="butterfly b1">
+          <svg viewBox="0 0 24 24" class="wing">
+            <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 
+                     C16 2, 22 6, 18 12 C22 18, 16 22, 12 12Z" />
+          </svg>
+        </div>
 
-              <svg class="butterfly b2" viewBox="0 0 24 24">
-                <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 C16 2, 22 6, 18 12 C22 18, 16 22, 12 12Z" />
-              </svg>
+        <!-- 🦋 Butterfly 2 -->
+        <div class="butterfly b2">
+          <svg viewBox="0 0 24 24" class="wing">
+            <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 
+                     C16 2, 22 6, 18 12 C22 18, 16 22, 12 12Z" />
+          </svg>
+        </div>
 
-              <svg class="butterfly b3" viewBox="0 0 24 24">
-                <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 C16 2, 22 6, 18 12 C22 18, 16 22, 12 12Z" />
-              </svg>
+        <!-- 🦋 Butterfly 3 -->
+        <div class="butterfly b3">
+          <svg viewBox="0 0 24 24" class="wing">
+            <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 
+                     C16 2, 22 6, 18 12 C22 18, 16 22, 12 12Z" />
+          </svg>
+        </div>
+
+        <!-- 🦋 Butterfly 4 -->
+        <div class="butterfly b4">
+          <svg viewBox="0 0 24 24" class="wing">
+            <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 
+                     C16 2, 22 6, 18 12 C22 18, 16 22, 12 12Z" />
+          </svg>
+        </div>
 
               <!-- Decorative images -->
               <img class="img-left-bottom" src="${bouquet}" />
