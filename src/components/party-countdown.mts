@@ -23,7 +23,6 @@ export class PartyCountdown extends LitElement {
   static styles = css`
     :host {
       --size: 70px;        /* overall size */
-      --radius: 26;        /* circle radius */
       --stroke: 4;         /* arc thickness */
       --value-size: 16px;  /* number */
       --label-size: 8px;   /* label */
@@ -33,7 +32,7 @@ export class PartyCountdown extends LitElement {
       display: inline-block;
       padding: 14px 18px;
       border-radius: 14px;
-      background: rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(8px);
     }
 
@@ -52,8 +51,8 @@ export class PartyCountdown extends LitElement {
 
     .track {
       fill: none;
+      stroke: rgba(255,255,255,0.12);
       stroke-width: var(--stroke);
-      stroke-width: 4;
     }
 
     .progress {
@@ -83,7 +82,7 @@ export class PartyCountdown extends LitElement {
 
     .faltan {
       margin: 0;
-      font-size: 9px;
+      font-size: 12px;
       text-align: center;
       font-weight: bolder;
     }
@@ -108,27 +107,36 @@ export class PartyCountdown extends LitElement {
   }
 
   private arc(value: number, max: number, color: string, label: string) {
-    const r = Number(getComputedStyle(this).getPropertyValue('--radius')) || 26;
+    const styles = getComputedStyle(this);
+
+    const size = parseFloat(styles.getPropertyValue("--size")) || 70;
+    const stroke = parseFloat(styles.getPropertyValue("--stroke")) || 4;
+
+    const padding = 2; // safety margin
+    const r = 50 - stroke / 2 - padding;
+
     const c = 2 * Math.PI * r;
     const offset = c - (value / max) * c;
 
     return html`
-      <svg viewBox="0 0 100 100">
-        <circle class="track" cx="50" cy="50" r=${r}></circle>
+    <svg viewBox="0 0 100 100">
+      <circle class="track" cx="50" cy="50" r=${r}></circle>
 
-        <circle
-          class="progress ${color}"
-          cx="50"
-          cy="50"
-          r=${r}
-          stroke-dasharray=${c}
-          stroke-dashoffset=${offset}
-        ></circle>
+      <circle
+        class="progress ${color}"
+        cx="50"
+        cy="50"
+        r=${r}
+        stroke-dasharray=${c}
+        stroke-dashoffset=${offset}
+      ></circle>
 
-        <text x="50" y="46" class="value">${value}</text>
-        <text x="50" y="62" class="label">${label}</text>
-      </svg>
-    `;
+      <text x="50" y="50" text-anchor="middle">
+        <tspan class="value" x="50" dy="-6">${value}</tspan>
+        <tspan class="label" x="50" dy="30">${label}</tspan>
+      </text>
+    </svg>
+  `;
   }
 
   render() {

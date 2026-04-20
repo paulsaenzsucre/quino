@@ -10,7 +10,7 @@ import '../components/party-details.mjs';
 
 @customElement("app-hero")
 export class AppHero extends LitElement {
-  @state() private mode: "idle" | "playing" | "finished" = "finished";
+  @state() private mode: "idle" | "playing" | "finished" = "idle";
 
   static styles = css`
     :host {
@@ -84,6 +84,7 @@ export class AppHero extends LitElement {
 
     .img-misquince {
       width: 300px;
+      margin-bottom: 32px;
     }
 
     .img-misquince2 {
@@ -96,7 +97,8 @@ export class AppHero extends LitElement {
       font-weight: 800;
       font-size: 90px;
       color: #0073e6;
-      top: 5%;
+      top: 3%;
+      margin-bottom: 0;
     }
 
     .kendra2 {
@@ -107,21 +109,38 @@ export class AppHero extends LitElement {
       margin-bottom: 6px;
     }
 
-    button {
-      padding: 12px 24px;
-      font-size: 16px;
+    .wa-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 20px;
+      cursor: pointer;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
 
       background: linear-gradient(135deg, #4da6ff, #1e90ff);
       color: white;
 
-      border: none;
-      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
 
-      box-shadow: 0 8px 20px rgba(30, 144, 255, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-      cursor: pointer;
-      transition: all 0.3s ease;
-      z-index: 3;
+    .wa-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(30, 144, 255, 0.5);
+    }
+
+    .wa-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .wa-icon {
+      width: 20px;
+      height: 20px;
     }
 
     button:hover {
@@ -413,17 +432,29 @@ export class AppHero extends LitElement {
 
       <!-- Content -->
       <div class="content2">
-        <h1 class="kendra2">Kendra</h1>
-        <img class="img-misquince2" src="${misquince}" />
+        <h1 class=${this.mode === "finished" ? "kendra2" : "kendra"}>Kendra</h1>
+        <img class=${this.mode === "finished" ? "img-misquince2": "img-misquince"} src="${misquince}" />
         ${this.mode === 'finished'
             ? html`<party-details class="details" .date=${new Date('2026-05-30T00:20:00-05:00')}> </party-details>`
             : null
           }
       <!-- Button -->
-      <button @click=${this.handleClick}>
+      <button class="wa-btn" @click=${this.handleClick}>
         ${this.mode === "finished"
-            ? "Send invitation"
-            : "Play video"}
+                  ? html`
+              <span class="wa-content">
+                <!-- WhatsApp SVG -->
+                <svg viewBox="0 0 32 32" class="wa-icon">
+                  <path
+                    fill="currentColor"
+                    d="M16 .396C7.164.396 0 7.56 0 16.396c0 2.89.756 5.71 2.192 8.196L0 32l7.63-2.163A15.89 15.89 0 0 0 16 32c8.836 0 16-7.164 16-16.396S24.836.396 16 .396zm0 29.207c-2.51 0-4.965-.676-7.096-1.956l-.507-.3-4.528 1.284 1.21-4.415-.33-.52A13.49 13.49 0 0 1 2.51 16.396C2.51 8.89 8.494 2.906 16 2.906c7.506 0 13.49 5.984 13.49 13.49 0 7.506-5.984 13.207-13.49 13.207zm7.396-9.978c-.403-.202-2.39-1.178-2.76-1.31-.37-.135-.64-.202-.91.202-.27.403-1.045 1.31-1.28 1.58-.236.27-.472.302-.875.1-.403-.202-1.7-.627-3.24-2-.997-.89-1.67-1.99-1.866-2.393-.196-.403-.02-.62.148-.822.15-.18.403-.47.605-.706.202-.236.27-.403.403-.673.135-.27.067-.505-.033-.706-.1-.202-.91-2.19-1.247-3-.328-.79-.662-.683-.91-.696-.236-.01-.505-.012-.774-.012s-.706.1-1.077.505c-.37.403-1.414 1.38-1.414 3.37s1.45 3.91 1.65 4.18c.202.27 2.85 4.35 6.9 6.1.964.416 1.715.665 2.3.85.966.307 1.845.264 2.54.16.775-.116 2.39-.977 2.727-1.92.337-.943.337-1.75.236-1.92-.1-.17-.37-.27-.774-.472z"
+                  />
+                </svg>
+
+                <span>Recibir Invitación</span>
+              </span>
+            `
+                  : "Reproducir video"}
       </button>
       </div>
       ${this.mode === "finished"
@@ -433,9 +464,8 @@ export class AppHero extends LitElement {
         target="2026-05-30T00:20:00-05:00"
         style="
           --size: 60px;
-          --radius: 40;
           --stroke: 4;
-          --value-size: 20px;
+          --value-size: 25px;
           --label-size: 15px";
       ></party-countdown>`
             : null}
