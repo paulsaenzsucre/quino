@@ -58,6 +58,55 @@ export class AppHero extends LitElement {
     }
 
     /* Decorative images */
+
+    .butterfly {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+
+      fill: #a3d5ff;
+      opacity: 0.8;
+
+      pointer-events: none;
+    }
+
+    /* Different positions */
+    .b1 {
+      left: 10%;
+      bottom: 10%;
+      animation: float1 12s infinite ease-in-out;
+    }
+
+    .b2 {
+      right: 15%;
+      bottom: 20%;
+      animation: float2 14s infinite ease-in-out;
+    }
+
+    .b3 {
+      left: 50%;
+      bottom: 5%;
+      animation: float3 16s infinite ease-in-out;
+    }
+
+    @keyframes float1 {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(40px, -120px) scale(1.1); }
+      100% { transform: translate(0, -240px) scale(1); }
+    }
+
+    @keyframes float2 {
+      0%   { transform: translate(0, 0); }
+      50%  { transform: translate(-60px, -150px); }
+      100% { transform: translate(0, -300px); }
+    }
+
+    @keyframes float3 {
+      0%   { transform: translate(-50%, 0); }
+      50%  { transform: translate(-30%, -130px); }
+      100% { transform: translate(-50%, -260px); }
+    }
+
     .img-left-bottom {
       position: absolute;
       bottom: -60px;
@@ -181,6 +230,19 @@ export class AppHero extends LitElement {
       <section class="hero">
         ${this.mode !== "playing"
         ? html`
+        <!-- Butterflies -->
+              <svg class="butterfly b1" viewBox="0 0 24 24">
+                <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 C16 2, 22 6, 18 12 C22 18, 16 22, 12 12Z" />
+              </svg>
+
+              <svg class="butterfly b2" viewBox="0 0 24 24">
+                <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 C16 2, 22 6, 18 12 C22 18, 16 22, 12 12Z" />
+              </svg>
+
+              <svg class="butterfly b3" viewBox="0 0 24 24">
+                <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 C16 2, 22 6, 18 12 C22 18, 16 22, 12 12Z" />
+              </svg>
+
               <!-- Decorative images -->
               <img class="img-left-bottom" src="${bouquet}" />
               <img class="corner-left-right" src="${corner}" />
