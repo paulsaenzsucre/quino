@@ -2,7 +2,6 @@ import { LitElement, html, css } from 'lit';
 import { property } from 'lit/decorators.js';
 
 // Import all components
-import '../components/hero-section';
 import '../components/new-hero.mjs'
 // import '../components/countdown-timer';
 // import '../components/guest-counter';

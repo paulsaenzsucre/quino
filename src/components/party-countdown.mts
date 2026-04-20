@@ -112,7 +112,7 @@ export class PartyCountdown extends LitElement {
   private arc(value: number, max: number, color: string, label: string) {
     const styles = getComputedStyle(this);
 
-    const size = parseFloat(styles.getPropertyValue("--size")) || 70;
+    //const size = parseFloat(styles.getPropertyValue("--size")) || 70;
     const stroke = parseFloat(styles.getPropertyValue("--stroke")) || 4;
 
     const padding = 2; // safety margin
