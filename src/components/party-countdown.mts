@@ -32,8 +32,8 @@ export class PartyCountdown extends LitElement {
       display: inline-block;
       padding: 14px 18px;
       border-radius: 14px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(8px);
+      background: rgba(13, 68, 138, 0.8);
+      backdrop-filter: blur(2px);
     }
 
     .grid {
@@ -70,6 +70,7 @@ export class PartyCountdown extends LitElement {
       fill: white;
       text-anchor: middle;
       dominant-baseline: middle;
+      fill: white;
     }
 
     .label {
@@ -78,6 +79,7 @@ export class PartyCountdown extends LitElement {
       text-anchor: middle;
       letter-spacing: 1px;
       font-weight: bolder;
+      fill: white;
     }
 
     .faltan {
@@ -85,6 +87,7 @@ export class PartyCountdown extends LitElement {
       font-size: 12px;
       text-align: center;
       font-weight: bolder;
+      color: white;
     }
 
     /* Colors (contrast with blue background) */
@@ -132,7 +135,7 @@ export class PartyCountdown extends LitElement {
       ></circle>
 
       <text x="50" y="50" text-anchor="middle">
-        <tspan class="value" x="50" dy="-6">${value}</tspan>
+        <tspan class="value" x="50" dy="-6" fill="${color}">${value}</tspan>
         <tspan class="label" x="50" dy="30">${label}</tspan>
       </text>
     </svg>
@@ -144,7 +147,7 @@ export class PartyCountdown extends LitElement {
 
     return html`
       <div class="container">
-        <p class="faltan"> FALTAN</>
+        <p class="faltan">FALTAN</>
         <div class="grid">
           ${this.arc(days, 365, "c1", "DIAS")}
           ${this.arc(hours, 24, "c2", "HOR")}

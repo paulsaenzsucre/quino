@@ -406,11 +406,9 @@ export class AppHero extends LitElement {
   render() {
     return html`
       <section class="hero">
-        ${this.mode !== "playing"
-        ? html`
         <!-- Butterflies -->
-        ${[0, 1, 2, 3, 4, 5].map(
-          i => html`
+        ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
+      i => html`
           <div class="butterfly" id="b${i}">
             <svg viewBox="0 0 24 24" class="wing">
               <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 
@@ -418,7 +416,9 @@ export class AppHero extends LitElement {
             </svg>
           </div>
         `
-        )}
+    )}
+        ${this.mode !== "playing"
+        ? html`
 
       <!-- Decorative images -->
       <img class="img-left-bottom" src="${bouquet}" />
@@ -433,7 +433,7 @@ export class AppHero extends LitElement {
       <!-- Content -->
       <div class="content2">
         <h1 class=${this.mode === "finished" ? "kendra2" : "kendra"}>Kendra</h1>
-        <img class=${this.mode === "finished" ? "img-misquince2": "img-misquince"} src="${misquince}" />
+        <img class=${this.mode === "finished" ? "img-misquince2" : "img-misquince"} src="${misquince}" />
         ${this.mode === 'finished'
             ? html`<party-details class="details" .date=${new Date('2026-05-30T00:20:00-05:00')}> </party-details>`
             : null
@@ -441,7 +441,7 @@ export class AppHero extends LitElement {
       <!-- Button -->
       <button class="wa-btn" @click=${this.handleClick}>
         ${this.mode === "finished"
-                  ? html`
+            ? html`
               <span class="wa-content">
                 <!-- WhatsApp SVG -->
                 <svg viewBox="0 0 32 32" class="wa-icon">
@@ -454,7 +454,7 @@ export class AppHero extends LitElement {
                 <span>Recibir Invitación</span>
               </span>
             `
-                  : "Reproducir video"}
+            : "Reproducir video"}
       </button>
       </div>
       ${this.mode === "finished"

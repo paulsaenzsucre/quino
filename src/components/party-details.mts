@@ -22,7 +22,7 @@ export class PartyDetails extends LitElement {
       font-weight: 800;
       font-size: 20px;
       letter-spacing: 1px;
-      fill: #1e6fb9;
+      fill: #0d4d8b;
     }
 
     .dot {
