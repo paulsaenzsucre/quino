@@ -179,7 +179,7 @@ export class HeroSection extends LitElement {
         <video
           class=${this.scene === 'intro' ? '' : 'hidden'}
           src="${videoUrl}"
-          autoplay
+          autoplay<party-details> </party-details>
           muted
           playsinline
         ></video>

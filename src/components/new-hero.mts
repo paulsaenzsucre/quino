@@ -6,10 +6,11 @@ import misquince from '../assets/images/misquince.svg';
 import video from '../assets/intro.mp4';
 import corner from '../assets/images/corner.png';
 import quinceanera from '../assets/images/quinceanera.png';
+import '../components/party-details.mjs';
 
 @customElement("app-hero")
 export class AppHero extends LitElement {
-  @state() private mode: "idle" | "playing" | "finished" = "idle";
+  @state() private mode: "idle" | "playing" | "finished" = "finished";
 
   static styles = css`
     :host {
@@ -70,11 +71,42 @@ export class AppHero extends LitElement {
       height: 80%;
     }
 
+    .content2 {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      height: 80%;
+      width: 90%;
+      z-index: 2;
+    }
+
+    .img-misquince {
+      width: 300px;
+    }
+
+    .img-misquince2 {
+      display: block-inline;
+      width: 150px;
+    }
+
+    .kendra {
+      font-family: 'Mea Culpa', cursive;
+      font-weight: 800;
+      font-size: 90px;
+      color: #0073e6;
+      top: 5%;
+    }
+
+    .kendra2 {
+      font-family: 'Mea Culpa', cursive;
+      font-weight: 800;
+      font-size: 50px;
+      color: #0073e6;
+    }
+
     button {
-      position: absolute;
-      top: 75%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       padding: 12px 24px;
       font-size: 16px;
 
@@ -92,7 +124,6 @@ export class AppHero extends LitElement {
     }
 
     button:hover {
-      transform: translate(-50%, -55%) scale(1.05);
       box-shadow: 0 12px 25px rgba(30, 144, 255, 0.5);
     }
 
@@ -205,14 +236,6 @@ export class AppHero extends LitElement {
       width: 110px;
     }
 
-    .img-misquince {
-      position: absolute;
-      top: 35%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 300px;
-    }
-
     .quinceanera {
       position: absolute;
       bottom: -30px;
@@ -220,12 +243,10 @@ export class AppHero extends LitElement {
       height: 50%;
     }
 
-    .kendra {
-      font-family: 'Mea Culpa', cursive;
-      font-weight: 800;
-      font-size: 90px;
-      color: #0073e6;
-      top: 5%;
+    .count {
+      position: absolute;
+      bottom: 0;
+      z-index: 10;
     }
   `;
 
@@ -390,17 +411,24 @@ export class AppHero extends LitElement {
       <img class="quinceanera" src="${quinceanera}" />
 
       <!-- Content -->
-      <div class="content">
-        <h1 class="kendra">Kendra</h1>
-        <img class="img-misquince" src="${misquince}" />
-      </div>
-
+      <div class="content2">
+        <h1 class="kendra2">Kendra</h1>
+        <img class="img-misquince2" src="${misquince}" />
+        ${this.mode === 'finished'
+            ? html`<party-details class="details" .date=${new Date('2026-05-30T00:20:00-05:00')}> </party-details>`
+            : null
+          }
       <!-- Button -->
       <button @click=${this.handleClick}>
         ${this.mode === "finished"
             ? "Send invitation"
             : "Play video"}
       </button>
+      </div>
+      ${this.mode === "finished"
+            ? html`
+      <party-countdown class="count" target="2026-05-30T00:20:00-05:00"></party-countdown>`
+            : null}
     `
         : html`
       <!-- Video -->
