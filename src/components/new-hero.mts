@@ -72,6 +72,7 @@ export class AppHero extends LitElement {
       bottom: -30px;
       left: 90px;
       width: 150px;
+      z-index: 3;
     }
 
     .corner-left-top {
@@ -79,6 +80,7 @@ export class AppHero extends LitElement {
       bottom: 90px;
       left: -30px;
       width: 150px;
+      z-index: 3;
       transform: scale(1, -1) rotate(90deg);
     }
 
@@ -96,6 +98,7 @@ export class AppHero extends LitElement {
       top: -30px;
       right: 90px;
       width: 150px;
+      z-index: 3;
       transform: scale(-1,-1);
     }
 
@@ -104,6 +107,7 @@ export class AppHero extends LitElement {
       top: 90px;
       right: -30px;
       width: 150px;
+      z-index: 3;
       transform: scale(-1,1) rotate(90deg);
     }
 
@@ -120,7 +124,7 @@ export class AppHero extends LitElement {
       top: 35%;
       left: 50%;
       transform: translateX(-50%);
-      width: 80%;
+      width: 300px;
     }
 
     .quinceanera {
@@ -205,7 +209,6 @@ export class AppHero extends LitElement {
               <video
                 src="${video}"
                 autoplay
-                muted
                 playsinline
                 webkit-playsinline
                 preload="auto"
