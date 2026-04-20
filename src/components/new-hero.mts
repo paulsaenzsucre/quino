@@ -20,12 +20,48 @@ export class AppHero extends LitElement {
       position: relative;
       height: 100vh;
       height: var(--app-height);
-      background: white;
+      
+      background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #e6f0ff 40%,
+        #cce0ff 100%
+      );
       color: white;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      background: radial-gradient(
+        circle at 50% 30%,
+        rgba(173, 216, 255, 0.4),
+        transparent 60%
+      );
+
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      background-image:
+        radial-gradient(circle, rgba(173,216,255,0.3) 2px, transparent 3px),
+        radial-gradient(circle, rgba(135,206,250,0.2) 3px, transparent 4px);
+
+      background-size: 80px 80px, 120px 120px;
+      background-position: 0 0, 40px 60px;
+
+      opacity: 0.5;
+      pointer-events: none;
     }
 
     .content {
@@ -41,10 +77,23 @@ export class AppHero extends LitElement {
       transform: translate(-50%, -50%);
       padding: 12px 24px;
       font-size: 16px;
+
+      background: linear-gradient(135deg, #4da6ff, #1e90ff);
+      color: white;
+
       border: none;
-      border-radius: 8px;
+      border-radius: 999px;
+
+      box-shadow: 0 8px 20px rgba(30, 144, 255, 0.3);
+
       cursor: pointer;
+      transition: all 0.3s ease;
       z-index: 3;
+    }
+
+    button:hover {
+      transform: translate(-50%, -55%) scale(1.05);
+      box-shadow: 0 12px 25px rgba(30, 144, 255, 0.5);
     }
 
     video {
@@ -68,6 +117,8 @@ export class AppHero extends LitElement {
       opacity: 0.8;
 
       pointer-events: none;
+      will-change: transform;
+      z-index:10;
     }
 
     /* 🪽 Wings (FLAPPING) */
@@ -76,64 +127,18 @@ export class AppHero extends LitElement {
       height: 100%;
 
       fill: #a3d5ff;
-      opacity: 0.8;
+      opacity: 0.9;
 
       transform-origin: center;
       animation: flap 0.4s infinite alternate ease-in-out;
+      filter: drop-shadow(0 0 6px rgba(255, 209, 102, 0.6));
     }
 
-    /* Individual butterflies */
-    .b1 {
-      left: 10%;
-      bottom: 5%;
-      animation: float1 14s infinite ease-in-out;
-    }
-
-    .b2 {
-      right: 15%;
-      bottom: 10%;
-      animation: float2 16s infinite ease-in-out;
-    }
-
-    .b3 {
-      left: 50%;
-      bottom: 0%;
-      animation: float3 18s infinite ease-in-out;
-    }
-
-    .b4 {
-      right: 30%;
-      bottom: 8%;
-      animation: float4 20s infinite ease-in-out;
-    }
-
-    /* 🌬️ Floating paths */
-    @keyframes float1 {
-      0%   { transform: translate(0, 0) rotate(0deg); }
-      50%  { transform: translate(40px, -120px) rotate(5deg); }
-      100% { transform: translate(0, -240px) rotate(-5deg); }
-    }
-
-    @keyframes float2 {
-      0%   { transform: translate(0, 0) rotate(0deg); }
-      50%  { transform: translate(-60px, -150px) rotate(-6deg); }
-      100% { transform: translate(0, -300px) rotate(6deg); }
-    }
-
-    @keyframes float3 {
-      0%   { transform: translate(-50%, 0) rotate(0deg); }
-      50%  { transform: translate(-30%, -130px) rotate(4deg); }
-      100% { transform: translate(-50%, -260px) rotate(-4deg); }
-    }
-
-    @keyframes float4 {
-      0%   { transform: translate(0, 0) rotate(0deg); }
-      50%  { transform: translate(30px, -100px) rotate(8deg); }
-      100% { transform: translate(-20px, -220px) rotate(-6deg); }
-    }
+    .b2 .wing { fill: #87cefa; }
+    .b3 .wing { fill: #bde0ff; }
+    .b4 .wing { fill: #6fbfff; }
 
     /* 🪽 Flapping */
-
     @keyframes flap {
       from { transform: scaleX(1); }
       to   { transform: scaleX(1.25); }
@@ -257,78 +262,157 @@ export class AppHero extends LitElement {
     // call your API here
   }
 
+  firstUpdated() {
+    const butterflies = this.renderRoot.querySelectorAll(".butterfly");
+
+    butterflies.forEach((b) => this.spawnButterfly(b as HTMLElement));
+  }
+
+  private spawnButterfly(el: HTMLElement) {
+    const hero = this.renderRoot.querySelector(".hero") as HTMLElement;
+
+    if (!hero) return;
+
+    const width = hero.clientWidth;
+    const height = hero.clientHeight;
+
+    // 🧹 cancel previous animations
+    el.getAnimations().forEach(a => a.cancel());
+
+    // 🎲 random side: 0 = left, 1 = right, 2 = top
+    const side = Math.floor(Math.random() * 3);
+
+    let startX = 0;
+    let startY = 0;
+
+    if (side === 0) {
+      startX = -40;
+      startY = Math.random() * height;
+    } else if (side === 1) {
+      startX = width + 40;
+      startY = Math.random() * height;
+    } else {
+      startX = Math.random() * width;
+      startY = -40;
+    }
+
+    // 🎯 destination (keep inside upper area)
+    const endX = Math.random() * width * 0.8 + width * 0.1;
+    const endY = Math.random() * height * 0.5;
+
+    const dx = endX - startX;
+    const dy = endY - startY;
+
+    // 🌀 curved path control point
+    const midX = dx * 0.5 + (Math.random() * 80 - 40);
+    const midY = dy * 0.5 - (40 + Math.random() * 40);
+
+    // ⏱️ duration (slow, elegant)
+    const duration = 14000 + Math.random() * 10000; // 14–24s
+
+    // 📏 size variation
+    const size = 18 + Math.random() * 18;
+    el.style.width = `${size}px`;
+    el.style.height = `${size}px`;
+
+    // 🎨 optional random color
+
+
+    const palette = [
+      { fill: "#ffd166", glow: "rgba(255, 209, 102, 0.6)" },
+      { fill: "#ffafcc", glow: "rgba(255, 175, 204, 0.6)" },
+      { fill: "#cdb4db", glow: "rgba(205, 180, 219, 0.6)" },
+      { fill: "#ffffff", glow: "rgba(255, 255, 255, 0.8)" }
+    ];
+
+    const pick = palette[Math.floor(Math.random() * palette.length)];
+    const svg = el.querySelector("svg") as SVGElement;
+
+    if (svg) {
+      svg.style.fill = pick.fill;
+      svg.style.filter = `drop-shadow(0 0 6px ${pick.glow})`;
+    }
+
+    // 📍 set start position
+    el.style.left = `${startX}px`;
+    el.style.top = `${startY}px`;
+
+    // 🔄 rotation randomness
+    const r1 = Math.random() * 20 - 10;
+    const r2 = Math.random() * 20 - 10;
+    const rMid = (r1 + r2) / 2;
+
+    // 🎬 animate
+    const animation = el.animate(
+      [
+        { transform: `translate(0px, 0px) rotate(${r1}deg)` },
+        { transform: `translate(${midX}px, ${midY}px) rotate(${rMid}deg)` },
+        { transform: `translate(${dx}px, ${dy}px) rotate(${r2}deg)` }
+      ],
+      {
+        duration,
+        easing: "ease-in-out",
+        fill: "forwards"
+      }
+    );
+
+    // 🔁 respawn with slight delay (natural flow)
+    animation.onfinish = () => {
+      setTimeout(() => this.spawnButterfly(el), Math.random() * 2000);
+    };
+  }
+
   render() {
     return html`
       <section class="hero">
         ${this.mode !== "playing"
         ? html`
         <!-- Butterflies -->
-              <!-- 🦋 Butterfly 1 -->
-        <div class="butterfly b1">
-          <svg viewBox="0 0 24 24" class="wing">
-            <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 
-                     C16 2, 22 6, 18 12 C22 18, 16 22, 12 12Z" />
-          </svg>
-        </div>
+        ${[0, 1, 2, 3, 4, 5].map(
+          i => html`
+          <div class="butterfly" id="b${i}">
+            <svg viewBox="0 0 24 24" class="wing">
+              <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 
+                       C16 2, 22 6, 18 12 C22 18, 16 22, 12 12Z" />
+            </svg>
+          </div>
+        `
+        )}
 
-        <!-- 🦋 Butterfly 2 -->
-        <div class="butterfly b2">
-          <svg viewBox="0 0 24 24" class="wing">
-            <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 
-                     C16 2, 22 6, 18 12 C22 18, 16 22, 12 12Z" />
-          </svg>
-        </div>
+      <!-- Decorative images -->
+      <img class="img-left-bottom" src="${bouquet}" />
+      <img class="corner-left-right" src="${corner}" />
+      <img class="corner-left-top" src="${corner}" />
+      <img class="img-right-top" src="${bouquet}" />
+      <img class="corner-right-left" src="${corner}" />
+      <img class="corner-right-bottom" src="${corner}" />
+      <img class="img-top-center" src="${crown}" />
+      <img class="quinceanera" src="${quinceanera}" />
 
-        <!-- 🦋 Butterfly 3 -->
-        <div class="butterfly b3">
-          <svg viewBox="0 0 24 24" class="wing">
-            <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 
-                     C16 2, 22 6, 18 12 C22 18, 16 22, 12 12Z" />
-          </svg>
-        </div>
+      <!-- Content -->
+      <div class="content">
+        <h1 class="kendra">Kendra</h1>
+        <img class="img-misquince" src="${misquince}" />
+      </div>
 
-        <!-- 🦋 Butterfly 4 -->
-        <div class="butterfly b4">
-          <svg viewBox="0 0 24 24" class="wing">
-            <path d="M12 12 C8 2, 2 6, 6 12 C2 18, 8 22, 12 12 
-                     C16 2, 22 6, 18 12 C22 18, 16 22, 12 12Z" />
-          </svg>
-        </div>
-
-              <!-- Decorative images -->
-              <img class="img-left-bottom" src="${bouquet}" />
-              <img class="corner-left-right" src="${corner}" />
-              <img class="corner-left-top" src="${corner}" />
-              <img class="img-right-top" src="${bouquet}" />
-              <img class="corner-right-left" src="${corner}" />
-              <img class="corner-right-bottom" src="${corner}" />
-              <img class="img-top-center" src="${crown}" />
-              <img class="quinceanera" src="${quinceanera}" />
-
-              <!-- Content -->
-              <div class="content">
-                <h1 class="kendra">Kendra</h1>
-                <img class="img-misquince" src="${misquince}" />
-              </div>
-
-              <!-- Button -->
-              <button @click=${this.handleClick}>
-                ${this.mode === "finished"
+      <!-- Button -->
+      <button @click=${this.handleClick}>
+        ${this.mode === "finished"
             ? "Send invitation"
             : "Play video"}
-              </button>
-            `
+      </button>
+    `
         : html`
-              <!-- Video -->
-              <video
-                src="${video}"
-                autoplay
-                playsinline
-                webkit-playsinline
-                preload="auto"
-                @ended=${this.handleVideoEnd}
-              ></video>
-            `}
+      <!-- Video -->
+      <video
+        src="${video}"
+        autoplay
+        playsinline
+        webkit-playsinline
+        preload="auto"
+        @ended=${this.handleVideoEnd}
+      ></video>
+    `}
       </section>
     `;
   }
