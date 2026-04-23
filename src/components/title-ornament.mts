@@ -1,12 +1,8 @@
-import { html, LitElement, svg } from "lit";
-import { customElement, state } from "lit/decorators.js";
+import { LitElement, svg } from "lit";
+import { customElement } from "lit/decorators.js";
 
 @customElement('title-ornament')
 class TitleOrnament extends LitElement {
-  @state()
-
-
-
   render() {
     return svg `
       <svg width="165.511" height="17.343" xmlns="http://www.w3.org/2000/svg" >
