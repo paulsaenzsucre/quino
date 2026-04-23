@@ -1,9 +1,6 @@
 :root {
-  color-scheme: light dark;
-  background-color: #ffffff;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  --primary-color: #11396f;
+  --contrast-color: gold;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -12,16 +9,13 @@
   }
 }
 
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 320px;
-  min-height: 100svh;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  padding: 0;
+}
+
+body {
+  border: 0;  
+  background: radial-gradient(circle at top, #b2d5f8, #9ac2fe);
 }

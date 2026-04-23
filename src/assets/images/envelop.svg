@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="27.124025mm"
+   height="17.30957mm"
+   viewBox="0 0 27.124025 17.30957"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="envelop.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.71268238"
+     inkscape:cx="51.214961"
+     inkscape:cy="32.272441"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-91.281249,-139.96458)">
+    <g
+       id="g10"
+       transform="matrix(0.26458333,0,0,0.26458333,38.697429,122.29253)">
+		<g
+   id="g6">
+			<rect
+   x="198.742"
+   y="66.792"
+   style="fill:#fff1d0"
+   width="102.516"
+   height="65.421997"
+   id="rect5" />
+
+		</g>
+
+		<g
+   id="g7">
+			<polygon
+   style="fill:#fae8bc"
+   points="250,97.367 297.922,66.792 301.258,66.792 301.258,68.932 266.6,91.045 263.516,93.014 250,101.638 236.484,93.014 233.399,91.045 198.742,68.932 198.742,66.792 202.078,66.792 "
+   id="polygon6" />
+
+		</g>
+
+		<g
+   id="g8">
+			<polygon
+   style="fill:#fae8bc"
+   points="237.5,91.881 236.484,93.014 201.17,132.213 198.742,132.213 198.742,129.524 233.399,91.045 234.82,89.471 "
+   id="polygon7" />
+
+		</g>
+
+		<g
+   id="g9">
+			<polygon
+   style="fill:#fae8bc"
+   points="263.516,93.014 262.5,91.881 265.18,89.471 266.6,91.045 301.258,129.524 301.258,132.213 298.83,132.213 "
+   id="polygon8" />
+
+		</g>
+
+		<path
+   style="fill:#ae1524"
+   d="m 250.018,94.534 c 0,0 1.599,-7.568 7.432,-7.405 4.274,0.12 7.112,4.006 6.987,8.463 -0.155,5.523 -4.945,10.716 -14.917,16.692 -9.621,-6.525 -14.113,-11.979 -13.958,-17.502 0.125,-4.457 3.177,-8.178 7.45,-8.058 5.833,0.163 7.006,7.81 7.006,7.81 z"
+   id="path9" />
+
+	</g>
+  </g>
+</svg>

@@ -7,6 +7,7 @@ import video from '../assets/intro.mp4';
 import corner from '../assets/images/corner.png';
 import quinceanera from '../assets/images/quinceanera.png';
 import '../components/party-details.mjs';
+import '../components/starry-sky.mjs';
 
 @customElement("app-hero")
 export class AppHero extends LitElement {
@@ -25,8 +26,8 @@ export class AppHero extends LitElement {
       background: linear-gradient(
         180deg,
         #ffffff 0%,
-        #e6f0ff 40%,
-        #cce0ff 100%
+        #99c1fc 40%,
+        #0d57c6 100%
       );
       color: white;
       overflow: hidden;
@@ -268,6 +269,11 @@ export class AppHero extends LitElement {
       bottom: 6px;
       z-index: 10;
     }
+
+    .stars {
+      width: 100%;
+      height: 100%;
+    }
   `;
 
   private setAppHeight = () => {
@@ -406,6 +412,7 @@ export class AppHero extends LitElement {
   render() {
     return html`
       <section class="hero">
+      <starry-sky class="stars"></starry-sky>
         <!-- Butterflies -->
         ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
       i => html`
