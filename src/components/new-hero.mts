@@ -293,7 +293,12 @@ export class AppHero extends LitElement {
 
   private handleClick() {
     if (this.mode === "finished") {
-      this.sendInvitation();
+      this.dispatchEvent(
+        new CustomEvent("button-click", {
+          detail: { message: "hello" },
+          bubbles: true,
+          composed: true,
+        }));
       return;
     }
 

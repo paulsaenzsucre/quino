@@ -4,6 +4,15 @@ import '../components/section-title.mjs';
 
 @customElement('rsvp-section')
 class RsvpSection extends LitElement {
+  private handleClick() {
+    this.dispatchEvent(
+      new CustomEvent('button-click', {
+        detail: {message: 'hello'},
+        bubbles: true,
+        composed: true
+      })
+    );
+  }
   render() {
     return html `
       <section class="container">
@@ -16,7 +25,7 @@ class RsvpSection extends LitElement {
           Por tratarse de un evento privado con cupo limitado, le agradeceremos confirmar su asistencia a la brevedad para reservar su lugar.
           Le solicitamos hacerlo antes del 15 de abril.
         </p>
-        <button class="wa-btn" >
+        <button class="wa-btn" @click=${this.handleClick}>
           <span class="wa-content">
             <!-- WhatsApp SVG -->
             <svg viewBox="0 0 32 32" class="wa-icon">
