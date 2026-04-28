@@ -485,7 +485,7 @@ export class AppHero extends LitElement {
         autoplay
         playsinline
         webkit-playsinline
-        preload="auto"
+        preload="metadata"
         @ended=${this.handleVideoEnd}
       ></video>
     `}
