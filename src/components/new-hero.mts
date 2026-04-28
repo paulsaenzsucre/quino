@@ -291,18 +291,30 @@ export class AppHero extends LitElement {
     window.removeEventListener("resize", this.setAppHeight)
   }
 
-  private handleClick() {
+  private async handleClick() {
     if (this.mode === "finished") {
       this.dispatchEvent(
         new CustomEvent("button-click", {
           detail: { message: "hello" },
           bubbles: true,
           composed: true,
-        }));
+        })
+      );
       return;
     }
 
     this.mode = "playing";
+    await this.updateComplete;
+
+    const videoEl = this.renderRoot.querySelector("video") as HTMLVideoElement | null;
+    if (!videoEl) return;
+
+    try {
+      videoEl.currentTime = 0;
+      await videoEl.play();
+    } catch (err) {
+      console.error("Video play failed:", err);
+    }
   }
 
   private handleVideoEnd() {
@@ -480,14 +492,15 @@ export class AppHero extends LitElement {
         : html`
       <!-- Video -->
       <video
-        src="${video}"
-        type="video/mp4"
-        autoplay
+        preload="metadata"
         playsinline
         webkit-playsinline
-        preload="metadata"
+        poster="${quinceanera}"
+        controls
         @ended=${this.handleVideoEnd}
-      ></video>
+      >
+       <source src="${video}" type="video/mp4" />
+      </video>
     `}
       </section>
     `;
