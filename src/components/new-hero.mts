@@ -50,22 +50,6 @@ export class AppHero extends LitElement {
       pointer-events: none;
     }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-
-      background-image:
-        radial-gradient(circle, rgba(173,216,255,0.3) 2px, transparent 3px),
-        radial-gradient(circle, rgba(135,206,250,0.2) 3px, transparent 4px);
-
-      background-size: 80px 80px, 120px 120px;
-      background-position: 0 0, 40px 60px;
-
-      opacity: 0.5;
-      pointer-events: none;
-    }
-
     .content {
       z-index: 2;
       text-align: center;
@@ -426,7 +410,7 @@ export class AppHero extends LitElement {
       <section class="hero">
       <starry-sky class="stars"></starry-sky>
         <!-- Butterflies -->
-        ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
+        ${[0, 1, 2, 3, 4].map(
       i => html`
           <div class="butterfly" id="b${i}">
             <svg viewBox="0 0 24 24" class="wing">
