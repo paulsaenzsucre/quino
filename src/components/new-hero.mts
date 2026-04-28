@@ -486,6 +486,7 @@ export class AppHero extends LitElement {
       <!-- Video -->
       <video
         src="${video}"
+        type="video/mp4"
         autoplay
         playsinline
         webkit-playsinline

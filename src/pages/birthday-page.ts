@@ -9,6 +9,7 @@ import '../components/reception-section.mjs';
 import '../components/rsvp-section.mjs';
 import '../components/bigday-section.mjs';
 import '../components/gifts-section.mjs';
+import '../components/app-toast.mjs';
 
 export class BirthdayPage extends LitElement {
   @property()
@@ -41,19 +42,38 @@ export class BirthdayPage extends LitElement {
     this.token = params.get('token');
 
     console.log("Token: ", this.token);
-    
+
   }
 
   async handleSubmit() {
-    await fetch(`https://phoenixsolutions.dev/send-invite`, {
+    const res = await fetch(`https://phoenixsolutions.dev/user/send-invite`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'x-api-key': `${this.token}`
       },
       body: JSON.stringify({
         id: this.token
       }),
     });
+
+    if (!res.ok) {
+      window.dispatchEvent(new CustomEvent("notify", {
+        detail: {
+          message: "¡El mensaje no fue enviado. Reintentar luego!",
+          duration: 5000
+        }
+      }));
+
+      return;
+    }
+
+    window.dispatchEvent(new CustomEvent("notify", {
+      detail: {
+        message: "¡Se envió su reserva a su número de Whatsapp!",
+        duration: 5000
+      }
+    }));
   }
 
   handleRSVP() {
@@ -73,6 +93,7 @@ export class BirthdayPage extends LitElement {
       ></rsvp-section>
       <reception-section></reception-section>
       <invitation-footer></invitation-footer>
+      <app-toast></app-toast>
     `;
   }
 }
