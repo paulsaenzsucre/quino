@@ -408,7 +408,6 @@ export class AppHero extends LitElement {
   render() {
     return html`
       <section class="hero">
-      <starry-sky class="stars"></starry-sky>
         <!-- Butterflies -->
         ${[0, 1, 2, 3, 4].map(
       i => html`
