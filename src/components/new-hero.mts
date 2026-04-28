@@ -309,11 +309,6 @@ export class AppHero extends LitElement {
     this.mode = "finished";
   }
 
-  private sendInvitation() {
-    console.log("Send invitation clicked");
-    // call your API here
-  }
-
   firstUpdated() {
     const butterflies = this.renderRoot.querySelectorAll(".butterfly");
 

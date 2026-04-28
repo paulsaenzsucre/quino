@@ -39,9 +39,7 @@ export class BirthdayPage extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
     const params = new URLSearchParams(window.location.search);
-    this.token = params.get('token');
-
-    console.log("Token: ", this.token);
+    this.token = params.get('token') ?? '';
 
   }
 
