@@ -8,21 +8,18 @@ class BigdaySection extends LitElement {
   
   render() {
     return html `
-    <section class="container">
+    <flex-section>
       <section-title text="El Gran Día"></section-title>
-      <event-date
-        class="event-date"
-        .target=${this.target}
-      ></event-date>
-
       <event-calendar
         .target=${this.target}
       ></event-calendar>
 
+      <a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=MmUzbmV2ZHRndG05aHJkcTc2dWtyZms4aDIgYTIyODJiMTFmZmFhZWVjODRhYTEyMDI1Yjc2YjgwZmY3MjMzYTNkN2VjZGM4ZmYxOGNjMzg5ZDU3MjRjNDNmM0Bn&amp;tmsrc=a2282b11ffaaeec84aa12025b76b80ff7233a3d7ecdc8ff18cc389d5724c43f3%40group.calendar.google.com"><img border="0" src="https://calendar.google.com/calendar/images/ext/gc_button1_es-419.gif" alt="Google Calendar"></a>
+
       <countdown-timer
         .target=${this.target}
       ></countdown-timer>
-    </section>
+    </flex-section>
     `;
   }
 
