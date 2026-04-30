@@ -133,7 +133,10 @@ export class BirthdayPage extends LitElement {
       ></app-hero>
       <my-quino .target=${new Date(this.targetDate)}></my-quino>
       ${this.guest
-        ? html`<invite-section .guest=${this.guest}></invite-section>`
+        ? html`<invite-section
+            .guest=${this.guest}
+            @button-click=${this.handleSubmit}
+          ></invite-section>`
         : null
       }
       <dress-code></dress-code>
