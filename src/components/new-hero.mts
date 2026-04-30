@@ -478,7 +478,6 @@ export class AppHero extends LitElement {
         preload="metadata"
         playsinline
         webkit-playsinline
-        poster="${quinceanera}"
         controls
         @ended=${this.handleVideoEnd}
       >

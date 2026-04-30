@@ -139,9 +139,6 @@ export class BirthdayPage extends LitElement {
       <dress-code></dress-code>
       <gifts-section></gifts-section>
       <bigday-section .target=${new Date(this.targetDate)} ></bigday-section>
-      <rsvp-section
-        @button-click=${this.handleSubmit}
-      ></rsvp-section>
       <reception-section></reception-section>
       <invitation-footer></invitation-footer>
       <app-toast></app-toast>

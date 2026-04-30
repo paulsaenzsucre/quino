@@ -61,7 +61,7 @@ class InviteSection extends LitElement {
           )}
         </ul>
 
-        <p class="cite footer">
+        <p class="cite footer">Por tratarse de un evento privado con cupo limitado, le agradeceremos confirmar su asistencia a la brevedad para reservar su lugar.
           Por favor confirma tu asistencia antes del <span>15/05/2026</span>.
         </p>
 
