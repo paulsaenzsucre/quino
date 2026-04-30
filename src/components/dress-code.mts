@@ -8,12 +8,13 @@ import '../components/event-date.mjs';
 import '../components/event-calendar.mjs';
 import '../components/google-map.mjs';
 import '../components/section-title.mjs';
+import '../components/flex-section.mjs';
 
 @customElement('dress-code')
 class DressCode extends LitElement {
   render() {
     return html `
-      <section class="container">
+      <flex-section>
         <section-title text="Código de Vestimenta"></section-title>
         <h3 class="subtitle" >Elegante</h3>
         <div class="icons" >
@@ -23,7 +24,7 @@ class DressCode extends LitElement {
         <p class="text" >
           Se reserva el color <span class="highlighted-text" >azul acero</span> apara la Quinceañera.
         </p>    
-      </section>
+      </flex-section>
     `;
   }
 
