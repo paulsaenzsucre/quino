@@ -17,5 +17,9 @@
 
 body {
   border: 0;  
-  background: radial-gradient(circle at top, #b2d5f8, #9ac2fe);
+   background-color: #b3d1fe;
+    background-image:
+        linear-gradient(90deg, rgba(255,255,255,.2) 50%, transparent 50%),
+        linear-gradient(rgba(255,255,255,.2) 50%, transparent 50%);
+    background-size: 3px 3px; /* Adjust size for finer/coarser texture */
 }

@@ -62,7 +62,6 @@ export class EventDate extends LitElement {
       align-items: center;
       position: relative;
       text-align: center;
-      margin: 2rem;
     }
 
     .month {
