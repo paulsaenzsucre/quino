@@ -5,7 +5,10 @@ import '../components/flex-section.mjs';
 
 @customElement('invite-section')
 class InviteSection extends LitElement {
-  @property({ type: Object }) guest: Guest | null = null;
+  @property({ type: Object }) guest: Guest = {
+    name: '',
+    seats: []
+  };
 
   handleClick() {
     this.dispatchEvent(
