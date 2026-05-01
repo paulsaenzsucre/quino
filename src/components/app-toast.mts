@@ -9,22 +9,27 @@ export class AppToast extends LitElement {
   static styles = css`
     .toast {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #333;
-      color: white;
+      top: 50%;
+      left: 50%;
+      width: 300px;
+      height: 100px;
+
+      background: #b8bcba;
+      color: var(--primary-color);
       padding: 12px 16px;
       border-radius: 8px;
+
       opacity: 0;
-      transform: translateY(20px);
+      transform: translate(-50%, -50%) scale(0.95);
       transition: all 0.25s ease;
-      font-size: 14px;
+
+      font-size: 16px;
       z-index: 9999;
     }
 
     .show {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate(-50%, -50%) scale(1);
     }
   `;
 

@@ -96,31 +96,38 @@ export class BirthdayPage extends LitElement {
   }
 
   async handleSubmit() {
-    const res = await fetch(`https://user.phoenixsolutions.dev/send-invite`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': `${this.token}`
-      },
-      body: JSON.stringify({
-        id: this.token
-      }),
-    });
+    // const res = await fetch(`https://user.phoenixsolutions.dev/send-invite`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'x-api-key': `${this.token}`
+    //   },
+    //   body: JSON.stringify({
+    //     id: this.token
+    //   }),
+    // });
 
-    if (!res.ok) {
-      window.dispatchEvent(new CustomEvent("notify", {
-        detail: {
-          message: "¡El mensaje no fue enviado. Reintentar luego!",
-          duration: 5000
-        }
-      }));
+    // if (!res.ok) {
+    //   window.dispatchEvent(new CustomEvent("notify", {
+    //     detail: {
+    //       message: "¡El mensaje no fue enviado. Reintentar luego!",
+    //       duration: 5000
+    //     }
+    //   }));
 
-      return;
-    }
+    //   return;
+    // }
+
+    // window.dispatchEvent(new CustomEvent("notify", {
+    //   detail: {
+    //     message: "¡Se envió su reserva a su número de Whatsapp!",
+    //     duration: 5000
+    //   }
+    // }));
 
     window.dispatchEvent(new CustomEvent("notify", {
       detail: {
-        message: "¡Se envió su reserva a su número de Whatsapp!",
+        message: "¡La opción de confirmación se activará el 06/05/2026!",
         duration: 5000
       }
     }));
