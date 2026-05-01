@@ -12,6 +12,7 @@ import '../components/gifts-section.mjs';
 import '../components/app-toast.mjs';
 import '../components/my-quino.mjs';
 import '../components/invite-section.mjs';
+import '../components/godfather-section.mjs';
 
 type RsvpStatus = 'confirmed' | 'canceled' | 'pending';
 interface Seat {
@@ -139,6 +140,7 @@ export class BirthdayPage extends LitElement {
         @button-click=${this.handleSubmit}
       ></app-hero>
       <my-quino .target=${new Date(this.targetDate)}></my-quino>
+      <godfather-section></godfather-section>
       ${this.guest
         ? html`<invite-section
             .guest=${this.guest}
