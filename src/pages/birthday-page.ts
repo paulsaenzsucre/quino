@@ -128,7 +128,7 @@ export class BirthdayPage extends LitElement {
 
     window.dispatchEvent(new CustomEvent("notify", {
       detail: {
-        message: "¡La opción de confirmación se activará el 06/05/2026!",
+        message: "¡La opción de confirmación se activará el 09/05/2026!",
         duration: 5000
       }
     }));

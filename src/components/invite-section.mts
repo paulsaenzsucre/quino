@@ -62,7 +62,7 @@ class InviteSection extends LitElement {
         </ul>
 
         <p class="cite footer">Por tratarse de un evento privado con cupo limitado, le agradeceremos confirmar su asistencia a la brevedad para reservar su lugar.
-          Por favor confirma tu asistencia desde el <span>06/05/2026</span> hasta antes del <span>15/05/2026</span>.
+          Por favor confirma tu asistencia desde el <span>09/05/2026</span> hasta antes del <span>15/05/2026</span>.
         </p>
 
         <button class="wa-btn" @click=${this.handleClick}>
