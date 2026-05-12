@@ -10,10 +10,10 @@ class InviteSection extends LitElement {
     seats: []
   };
 
-  handleClick() {
+  handleClick(sid: string, status: 'confirmed' | 'canceled') {
     this.dispatchEvent(
       new CustomEvent('button-click', {
-        detail: { message: 'hello' },
+        detail: { sid, status },
         bubbles: true,
         composed: true
       })
@@ -51,11 +51,37 @@ class InviteSection extends LitElement {
         <ul class="list">
           ${this.guest.seats.map(
             (seat) => html`
-              <li>
+              <li class="seat-item">
                 <span class="name">${seat.name}</span>
-                <span class="status ${seat.status}">
-                  ${this.translateStatus(seat.status)}
-                </span>
+                ${
+                  seat.status === 'pending'
+                    ? html`
+                      <div class="actions">
+                        <span class="status pending">Pendiente</span>
+                        <button
+                          class="btn confirm"
+                          @click=${() => this.handleClick(seat.id, 'confirmed')}
+                        >
+                          Confirmar
+                        </button>
+                        <button
+                          class="btn cancel"
+                          @click=${() => this.handleClick(seat.id, 'canceled')}
+                        >
+                          Cancelar
+                        </button>
+                      </div>
+                    `
+                    : html`
+                      <span class="status ${seat.status}">
+                      ${
+                        seat.status === 'confirmed'
+                          ? 'Confirmado'
+                          : 'Cancelado'
+                      }
+                      </span>
+                    `
+                }
               </li>
             `
           )}
@@ -65,19 +91,6 @@ class InviteSection extends LitElement {
           Por favor confirma tu asistencia desde el <span>09/05/2026</span> hasta antes del <span>15/05/2026</span>.
         </p>
 
-        <button class="wa-btn" @click=${this.handleClick}>
-          <span class="wa-content">
-            <!-- WhatsApp SVG -->
-            <svg viewBox="0 0 32 32" class="wa-icon">
-              <path
-                fill="currentColor"
-                d="M16 .396C7.164.396 0 7.56 0 16.396c0 2.89.756 5.71 2.192 8.196L0 32l7.63-2.163A15.89 15.89 0 0 0 16 32c8.836 0 16-7.164 16-16.396S24.836.396 16 .396zm0 29.207c-2.51 0-4.965-.676-7.096-1.956l-.507-.3-4.528 1.284 1.21-4.415-.33-.52A13.49 13.49 0 0 1 2.51 16.396C2.51 8.89 8.494 2.906 16 2.906c7.506 0 13.49 5.984 13.49 13.49 0 7.506-5.984 13.207-13.49 13.207zm7.396-9.978c-.403-.202-2.39-1.178-2.76-1.31-.37-.135-.64-.202-.91.202-.27.403-1.045 1.31-1.28 1.58-.236.27-.472.302-.875.1-.403-.202-1.7-.627-3.24-2-.997-.89-1.67-1.99-1.866-2.393-.196-.403-.02-.62.148-.822.15-.18.403-.47.605-.706.202-.236.27-.403.403-.673.135-.27.067-.505-.033-.706-.1-.202-.91-2.19-1.247-3-.328-.79-.662-.683-.91-.696-.236-.01-.505-.012-.774-.012s-.706.1-1.077.505c-.37.403-1.414 1.38-1.414 3.37s1.45 3.91 1.65 4.18c.202.27 2.85 4.35 6.9 6.1.964.416 1.715.665 2.3.85.966.307 1.845.264 2.54.16.775-.116 2.39-.977 2.727-1.92.337-.943.337-1.75.236-1.92-.1-.17-.37-.27-.774-.472z"
-              />
-            </svg>
-
-            <span>Confirmar Asistencia</span>
-          </span>
-        </button>
       </flex-section>
     `;
   }
@@ -146,20 +159,52 @@ class InviteSection extends LitElement {
       font-weight: 500;
     }
 
-    .status {
-      font-size: 13px;
-      padding: 4px 10px;
-      border-radius: 999px;
+    .seat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 0;
     }
 
-    .status.confirmed {
-      background: #d4edda;
-      color: #155724;
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status {
+      font-weight: 600;
     }
 
     .status.pending {
-      background: #fff3cd;
-      color: #856404;
+      color: #eab308;
+    }
+
+    .status.confirmed {
+      color: #22c55e;
+    }
+
+    .status.canceled {
+      color: #ef4444;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 8px;
+      padding: 0.4rem 0.8rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn.confirm {
+      background: #22c55e;
+      color: white;
+    }
+
+    .btn.cancel {
+      background: #ef4444;
+      color: white;
     }
 
     .footer {

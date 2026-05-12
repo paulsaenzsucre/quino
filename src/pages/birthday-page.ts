@@ -16,6 +16,7 @@ import '../components/godfather-section.mjs';
 
 type RsvpStatus = 'confirmed' | 'canceled' | 'pending';
 interface Seat {
+  id: string;
   name: string;
   status: RsvpStatus;
 }
@@ -68,7 +69,7 @@ export class BirthdayPage extends LitElement {
       this.guest = await this.getGuestInfo();
     }
     console.log('token: ', this.token, 'guest: ', this.guest);
-    
+
   }
 
   async getGuestInfo(): Promise<Guest | null> {
@@ -86,7 +87,7 @@ export class BirthdayPage extends LitElement {
       if (!res.ok) {
         return null;
       };
-      
+
 
       const json = await res.json();
       return json.data;
@@ -96,7 +97,51 @@ export class BirthdayPage extends LitElement {
     }
   }
 
-  async handleSubmit() {
+  async handleSubmit(e: CustomEvent) {
+    try {
+      const body = {
+        sid: e.detail.sid,
+        confirmed: e.detail.status
+      };
+
+      const response = await fetch(
+        `https://user.phoenixsolutions.dev/guestinfo/${this.token}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': `${this.token}`
+        },
+        body: JSON.stringify(body)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed updating RSVP');
+      }
+
+      const result = await response.json();
+      const newSeat: Seat = {
+        id: result.data.id,
+        name: result.data.label,
+        status: result.data.confirmed
+      };
+
+      if (this.guest && newSeat) {
+        this.guest = {
+          ...this.guest,
+          seats: this.guest.seats.map((seat) =>
+            seat.id === newSeat.id
+              ? {
+                ...seat,
+                status: newSeat.status
+              }
+              : seat
+          )
+        };
+      }
+    } catch (err) {
+      console.error(err);
+
+    }
     // const res = await fetch(`https://user.phoenixsolutions.dev/send-invite`, {
     //   method: 'POST',
     //   headers: {
@@ -126,12 +171,12 @@ export class BirthdayPage extends LitElement {
     //   }
     // }));
 
-    window.dispatchEvent(new CustomEvent("notify", {
-      detail: {
-        message: "¡La opción de confirmación se activará el 09/05/2026!",
-        duration: 5000
-      }
-    }));
+    // window.dispatchEvent(new CustomEvent("notify", {
+    //   detail: {
+    //     message: "¡La opción de confirmación se activará el 09/05/2026!",
+    //     duration: 5000
+    //   }
+    // }));
   }
 
   render() {
