@@ -35,7 +35,7 @@ export class BirthdayPage extends LitElement {
   @state()
   guest: Guest | null = null;
 
-  targetDate = '2026-05-30T20:00:00-05:00';
+  targetDate = '2026-05-30T20:30:00-05:00';
 
   static styles = css`
     :host {
