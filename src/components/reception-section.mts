@@ -2,6 +2,7 @@ import { css, html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
 import castle from '../assets/images/castle.svg';
 import '../components/section-title.mjs';
+import entrada from '../assets/images/entrada.png';
 
 @customElement('reception-section')
 class ReceptionSection extends LitElement {
@@ -24,6 +25,8 @@ class ReceptionSection extends LitElement {
             .lng=${-76.9508842}
             .zoom=${16}
           ></google-map>
+
+          <img class="entrada" src="${entrada}" />
       </section>
     `;
   }
