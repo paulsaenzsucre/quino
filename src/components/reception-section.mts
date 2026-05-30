@@ -20,8 +20,8 @@ class ReceptionSection extends LitElement {
           </p>
 
           <google-map
-            .lat=${-12.2247672}
-            .lng=${-76.9518078}
+            .lat=${-12.2248527}
+            .lng=${-76.9508842}
             .zoom=${16}
           ></google-map>
       </section>
