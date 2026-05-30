@@ -56,6 +56,10 @@ class ReceptionSection extends LitElement {
       height: auto;
     }
 
+    .entrada {
+      width: 90%;
+    }
+
     .local {
       font-family="PT Serif", serif;
       font-size: 20px;
